@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bakalářská práce</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    #countdown {
+      font-size: 50px;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div id="countdown"></div>
+
+  <script>
+    // Funkce pro výpočet zbývajícího času do data
+    function getRemainingTime() {
+      const deadline = new Date("2024-04-18");
+      const currentDate = new Date();
+      const timeDifference = deadline.getTime() - currentDate.getTime();
+      const remainingSeconds = Math.floor(timeDifference / 1000);
+      const days = Math.floor(remainingSeconds / (3600 * 24));
+      const hours = Math.floor((remainingSeconds % (3600 * 24)) / 3600);
+      const minutes = Math.floor((remainingSeconds % 3600) / 60);
+      const seconds = remainingSeconds % 60;
+      return { days, hours, minutes, seconds };
+    }
+
+    // Funkce pro aktualizaci odpocitávače
+    function updateCountdown() {
+      const { days, hours, minutes, seconds } = getRemainingTime();
+      const countdownElement = document.getElementById('countdown');
+      countdownElement.textContent = `Do odevzdání zbývá ${days} dnů, ${hours} hodin, ${minutes} minut a ${seconds} sekund.`;
+    }
+
+    // Spuštění aktualizace každou sekundu
+    setInterval(updateCountdown, 1000);
+
+    // Spuštění aktualizace při načtení stránky
+    updateCountdown();
+  </script>
+</body>
+</html>
